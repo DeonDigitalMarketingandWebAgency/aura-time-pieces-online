@@ -12,6 +12,7 @@ import Technology from "./pages/Technology";
 import StoreLocator from "./pages/StoreLocator";
 import Support from "./pages/Support";
 import Contact from "./pages/Contact";
+import CollectionPage from "./pages/CollectionPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/products" element={<Products />} />
           <Route path="/products/:collection" element={<Products />} />
           <Route path="/products/:collection/:productId" element={<ProductDetail />} />
+          <Route path="/collections/:collection" element={<CollectionPage />} />
           <Route path="/technology" element={<Technology />} />
           <Route path="/store-locator" element={<StoreLocator />} />
           <Route path="/support" element={<Support />} />
