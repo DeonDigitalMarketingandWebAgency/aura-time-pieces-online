@@ -6,22 +6,30 @@ import { Card, CardContent } from '@/components/ui/card';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import products from '@/data/products';
+import { motion } from 'framer-motion';
+import { MapPin, ArrowRight, Clock } from 'lucide-react';
 
 const Index = () => {
-  // Get featured products (one from each collection)
-  const featuredProducts = products.reduce((acc, product) => {
-    if (!acc.some(p => p.collection === product.collection)) {
-      acc.push(product);
-    }
-    return acc;
-  }, [] as typeof products).slice(0, 3);
+  // Get featured products - bestsellers first, then one from each collection
+  const bestsellers = products.filter(product => product.isBestseller);
+  const newArrivals = products.filter(product => product.isNew);
+  
+  const featuredProducts = [
+    ...bestsellers,
+    ...products.filter(p => !bestsellers.some(b => b.id === p.id)).reduce((acc, product) => {
+      if (!acc.some(p => p.collection === product.collection)) {
+        acc.push(product);
+      }
+      return acc;
+    }, [] as typeof products)
+  ].slice(0, 4);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center">
+      <section className="relative h-[85vh] flex items-center">
         <div className="absolute inset-0 z-0">
           <img 
             src="https://images.unsplash.com/photo-1619134778706-7015533a6150?q=80&w=2000&auto=format&fit=crop" 
@@ -32,17 +40,78 @@ const Index = () => {
         </div>
         
         <div className="container relative z-10 text-white">
-          <div className="max-w-2xl animate-fade-in">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4">Time Elevated to Art</h1>
-            <p className="text-lg mb-8">Precision engineering meets timeless design in every Aura timepiece.</p>
-            <div className="flex flex-wrap gap-4">
-              <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white px-8 py-6">
+          <div className="max-w-2xl">
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              Time Elevated to Art
+            </motion.h1>
+            <motion.p 
+              className="text-lg mb-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+            >
+              Precision engineering meets timeless design in every Aura timepiece.
+            </motion.p>
+            <motion.div 
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.6 }}
+            >
+              <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white px-8 py-6 text-base">
                 <Link to="/products">Explore Collections</Link>
               </Button>
-              <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-aura-navy px-8 py-6">
-                <Link to="/store-locator">Find a Store</Link>
+              <Button asChild variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-aura-navy px-8 py-6 text-base flex items-center gap-2 relative overflow-hidden group"
+              >
+                <Link to="/store-locator">
+                  <span className="absolute inset-0 w-0 bg-aura-gold group-hover:w-full transition-all duration-300 ease-out z-0"></span>
+                  <MapPin className="relative z-10" size={20} />
+                  <span className="relative z-10">Find a Store Near You</span>
+                </Link>
               </Button>
-            </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Collections Quick Access */}
+      <section className="py-10 bg-white">
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Link to="/collections/premier" className="group">
+              <div className="bg-gray-100 rounded-lg p-6 text-center transition-all duration-200 hover:shadow-lg hover:bg-gray-50 h-full flex flex-col items-center justify-center">
+                <h3 className="font-serif text-xl mb-2">Premier</h3>
+                <p className="text-sm text-gray-600 mb-3">Elegance & Sophistication</p>
+                <ArrowRight className="text-aura-gold transition-transform duration-200 group-hover:translate-x-1" size={20} />
+              </div>
+            </Link>
+            <Link to="/collections/sportz" className="group">
+              <div className="bg-gray-100 rounded-lg p-6 text-center transition-all duration-200 hover:shadow-lg hover:bg-gray-50 h-full flex flex-col items-center justify-center">
+                <h3 className="font-serif text-xl mb-2">Sportz</h3>
+                <p className="text-sm text-gray-600 mb-3">Durability & Performance</p>
+                <ArrowRight className="text-aura-gold transition-transform duration-200 group-hover:translate-x-1" size={20} />
+              </div>
+            </Link>
+            <Link to="/collections/classic" className="group">
+              <div className="bg-gray-100 rounded-lg p-6 text-center transition-all duration-200 hover:shadow-lg hover:bg-gray-50 h-full flex flex-col items-center justify-center">
+                <h3 className="font-serif text-xl mb-2">Classic</h3>
+                <p className="text-sm text-gray-600 mb-3">Timeless & Refined</p>
+                <ArrowRight className="text-aura-gold transition-transform duration-200 group-hover:translate-x-1" size={20} />
+              </div>
+            </Link>
+            <Link to="/collections/limited-edition" className="group">
+              <div className="bg-gray-100 rounded-lg p-6 text-center transition-all duration-200 hover:shadow-lg hover:bg-gray-50 h-full flex flex-col items-center justify-center">
+                <h3 className="font-serif text-xl mb-2">Limited Edition</h3>
+                <p className="text-sm text-gray-600 mb-3">Exclusive & Unique</p>
+                <ArrowRight className="text-aura-gold transition-transform duration-200 group-hover:translate-x-1" size={20} />
+              </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -69,7 +138,7 @@ const Index = () => {
                   <h3 className="text-2xl font-serif mb-2">Premier Collection</h3>
                   <p className="mb-4">Elegance redefined for the connoisseur</p>
                   <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white">
-                    <Link to="/products/premier">View Collection</Link>
+                    <Link to="/collections/premier">View Collection</Link>
                   </Button>
                 </div>
               </div>
@@ -87,7 +156,45 @@ const Index = () => {
                   <h3 className="text-2xl font-serif mb-2">Sportz Collection</h3>
                   <p className="mb-4">Performance and style for the active life</p>
                   <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white">
-                    <Link to="/products/sportz">View Collection</Link>
+                    <Link to="/collections/sportz">View Collection</Link>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <Card className="overflow-hidden border-none shadow-lg">
+              <div className="h-80 relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1548171915-152645368a1a?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Classic Collection" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-aura-navy to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-2xl font-serif mb-2">Classic Collection</h3>
+                  <p className="mb-4">Timeless designs that endure</p>
+                  <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white">
+                    <Link to="/collections/classic">View Collection</Link>
+                  </Button>
+                </div>
+              </div>
+            </Card>
+            
+            <Card className="overflow-hidden border-none shadow-lg">
+              <div className="h-80 relative">
+                <img 
+                  src="https://images.unsplash.com/photo-1623998022290-a74f8cc36491?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Limited Edition Collection" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-aura-navy to-transparent opacity-70"></div>
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-2xl font-serif mb-2">Limited Edition</h3>
+                  <p className="mb-4">Exclusive timepieces for collectors</p>
+                  <Button asChild className="bg-aura-gold hover:bg-opacity-90 border-none text-white">
+                    <Link to="/collections/limited-edition">View Collection</Link>
                   </Button>
                 </div>
               </div>
@@ -105,26 +212,39 @@ const Index = () => {
             Explore our most coveted designs, each representing the pinnacle of watchmaking excellence.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {featuredProducts.map((product) => (
-              <Card key={product.id} className="overflow-hidden transition-transform hover:shadow-lg hover:-translate-y-1">
-                <Link to={`/products/${product.collection}/${product.id}`}>
-                  <div className="aspect-square overflow-hidden">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <CardContent className="p-4">
-                    <h3 className="text-lg font-serif font-medium">{product.name}</h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      {product.collection.charAt(0).toUpperCase() + product.collection.slice(1)} Collection
-                    </p>
-                    <p className="font-medium text-aura-navy">${product.price.toLocaleString()}</p>
-                  </CardContent>
-                </Link>
-              </Card>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {featuredProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="overflow-hidden transition-transform hover:shadow-lg hover:-translate-y-1 h-full">
+                  <Link to={`/products/${product.collection}/${product.id}`}>
+                    <div className="aspect-square overflow-hidden relative">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                      {product.isNew && (
+                        <div className="absolute top-2 right-2 bg-aura-gold text-white text-xs px-2 py-1 rounded">NEW</div>
+                      )}
+                      {product.isBestseller && (
+                        <div className="absolute top-2 left-2 bg-aura-navy text-white text-xs px-2 py-1 rounded">BESTSELLER</div>
+                      )}
+                    </div>
+                    <CardContent className="p-4">
+                      <h3 className="text-lg font-serif font-medium">{product.name}</h3>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {product.collection.charAt(0).toUpperCase() + product.collection.slice(1)} Collection
+                      </p>
+                      <p className="font-medium text-aura-navy">${product.price.toLocaleString()}</p>
+                    </CardContent>
+                  </Link>
+                </Card>
+              </motion.div>
             ))}
           </div>
           
@@ -159,6 +279,46 @@ const Index = () => {
                 alt="Watch craftsmanship" 
                 className="w-full h-full object-cover rounded-md shadow-lg"
               />
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Store Locator Highlight */}
+      <section className="py-16 bg-gray-100">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="relative h-80 overflow-hidden rounded-lg">
+              <img 
+                src="https://images.unsplash.com/photo-1595422656745-039f1574ea4b?q=80&w=1000&auto=format&fit=crop" 
+                alt="Aura Watches Boutique" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-aura-navy to-transparent opacity-50"></div>
+            </div>
+            <div>
+              <h2 className="text-3xl font-serif mb-4">Visit Our Boutiques</h2>
+              <div className="w-24 h-px bg-aura-gold mb-6"></div>
+              <p className="mb-6">
+                Experience the world of Aura in person at one of our exclusive boutiques. Our knowledgeable staff will guide you through our collections and help you find the perfect timepiece.
+              </p>
+              <ul className="space-y-4 mb-6">
+                <li className="flex items-start">
+                  <MapPin className="text-aura-gold mr-2 flex-shrink-0 mt-1" size={18} />
+                  <span>Discover our global network of boutiques and authorized retailers</span>
+                </li>
+                <li className="flex items-start">
+                  <Clock className="text-aura-gold mr-2 flex-shrink-0 mt-1" size={18} />
+                  <span>Book a private consultation with our watch specialists</span>
+                </li>
+              </ul>
+              <Button asChild size="lg" className="bg-aura-gold hover:bg-opacity-90 text-white flex items-center gap-2 group">
+                <Link to="/store-locator">
+                  <MapPin size={18} />
+                  <span>Find a Store Near You</span>
+                  <ArrowRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
