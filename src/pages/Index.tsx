@@ -67,7 +67,7 @@ const Index = () => {
                 <Link to="/products">Explore Collections</Link>
               </Button>
               <Button asChild variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-aura-navy px-8 py-6 text-base flex items-center gap-2 relative overflow-hidden group"
+                className="border-white text-black hover:bg-aura-gold hover:text-white px-8 py-6 text-base flex items-center gap-2 relative overflow-hidden group"
               >
                 <Link to="/store-locator">
                   <span className="absolute inset-0 w-0 bg-aura-gold group-hover:w-full transition-all duration-300 ease-out z-0"></span>
