@@ -11,10 +11,6 @@ export interface Product {
     [key: string]: string;
   };
   documentUrl: string;
-  isLimitedEdition?: boolean;
-  isNew?: boolean;
-  isBestseller?: boolean;
-  releaseDate?: string;
 }
 
 const products: Product[] = [
@@ -41,8 +37,7 @@ const products: Product[] = [
       "Dial": "Blue sunray",
       "Strap": "Stainless steel bracelet"
     },
-    documentUrl: "/downloads/premier-chronograph.pdf",
-    isBestseller: true
+    documentUrl: "/downloads/premier-chronograph.pdf"
   },
   {
     id: "premier-auto-1",
@@ -92,8 +87,7 @@ const products: Product[] = [
       "Dial": "Black",
       "Strap": "Rubber with titanium buckle"
     },
-    documentUrl: "/downloads/sportz-diver.pdf",
-    isBestseller: true
+    documentUrl: "/downloads/sportz-diver.pdf"
   },
   {
     id: "sportz-chrono-1",
@@ -170,114 +164,6 @@ const products: Product[] = [
     },
     documentUrl: "/downloads/sportz-field.pdf"
   },
-  // Classic Collection
-  {
-    id: "classic-heritage-1",
-    name: "Classic Heritage",
-    collection: "classic",
-    price: 2100,
-    image: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?q=80&w=1000&auto=format&fit=crop",
-    description: "The Classic Heritage embodies timeless refinement. With a slim 38mm yellow gold case, minimalist white dial, and genuine leather strap, it pays tribute to the golden age of watchmaking.",
-    features: [
-      "Swiss mechanical movement",
-      "Hand-wound mechanism",
-      "Sapphire crystal",
-      "Exhibition caseback",
-      "30m water resistance"
-    ],
-    specifications: {
-      "Case Size": "38mm",
-      "Case Material": "Yellow gold",
-      "Movement": "Hand-wound mechanical",
-      "Power Reserve": "42 hours",
-      "Water Resistance": "30m",
-      "Dial": "White with applied markers",
-      "Strap": "Brown calfskin leather"
-    },
-    documentUrl: "/downloads/classic-heritage.pdf",
-    isBestseller: true
-  },
-  {
-    id: "classic-slim-1",
-    name: "Classic Slim",
-    collection: "classic",
-    price: 1750,
-    image: "https://images.unsplash.com/photo-1539874754764-5a96559165b0?q=80&w=1000&auto=format&fit=crop",
-    description: "The Classic Slim is the epitome of understated elegance. With its ultra-thin 7mm profile, 39mm stainless steel case, and minimalist dial, it's the perfect dress watch for formal occasions.",
-    features: [
-      "Ultra-thin automatic movement",
-      "Date display",
-      "Sapphire crystal",
-      "Genuine alligator leather strap",
-      "30m water resistance"
-    ],
-    specifications: {
-      "Case Size": "39mm",
-      "Case Material": "Stainless steel",
-      "Movement": "Ultra-thin automatic",
-      "Power Reserve": "40 hours",
-      "Water Resistance": "30m",
-      "Dial": "Silver sunburst",
-      "Strap": "Black alligator leather"
-    },
-    documentUrl: "/downloads/classic-slim.pdf"
-  },
-  // Limited Edition
-  {
-    id: "lunar-series-1",
-    name: "Lunar Series - Celestial",
-    collection: "premier",
-    price: 8900,
-    image: "https://images.unsplash.com/photo-1612177343582-665b93b34403?q=80&w=1000&auto=format&fit=crop",
-    description: "The Lunar Series Celestial is an exclusive limited edition timepiece featuring a hand-painted aventurine dial that captures the night sky. Limited to only 88 pieces worldwide.",
-    features: [
-      "In-house manufacture movement",
-      "Astronomical moon phase",
-      "Starry night aventurine dial",
-      "18k white gold case",
-      "Limited to 88 pieces"
-    ],
-    specifications: {
-      "Case Size": "42mm",
-      "Case Material": "18k white gold",
-      "Movement": "In-house astronomical",
-      "Power Reserve": "72 hours",
-      "Water Resistance": "50m",
-      "Dial": "Aventurine",
-      "Strap": "Blue alligator leather"
-    },
-    documentUrl: "/downloads/lunar-series.pdf",
-    isLimitedEdition: true,
-    isNew: true,
-    releaseDate: "2023-11-01"
-  },
-  {
-    id: "racing-heritage-1",
-    name: "Racing Heritage Chronograph",
-    collection: "sportz",
-    price: 6500,
-    image: "https://images.unsplash.com/photo-1623998022290-a74f8cc36491?q=80&w=1000&auto=format&fit=crop",
-    description: "The Racing Heritage Chronograph celebrates our motorsport legacy with a design inspired by vintage racing dashboards. Limited to 250 pieces, each individually numbered.",
-    features: [
-      "High-frequency chronograph movement",
-      "Tachymeter scale",
-      "Perforated leather rally strap",
-      "Individually numbered",
-      "Limited to 250 pieces"
-    ],
-    specifications: {
-      "Case Size": "44mm",
-      "Case Material": "Stainless steel with ceramic bezel",
-      "Movement": "High-frequency automatic chronograph",
-      "Power Reserve": "60 hours",
-      "Water Resistance": "100m",
-      "Dial": "Carbon fiber with racing stripes",
-      "Strap": "Perforated calfskin leather"
-    },
-    documentUrl: "/downloads/racing-heritage.pdf",
-    isLimitedEdition: true,
-    releaseDate: "2023-09-15"
-  }
 ];
 
 export default products;

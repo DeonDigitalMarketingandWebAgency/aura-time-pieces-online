@@ -16,12 +16,8 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6 items-center">
-          <Link to="/products" className="nav-link font-medium">All Products</Link>
-          <Link to="/collections/premier" className="nav-link font-medium">Premier</Link>
-          <Link to="/collections/sportz" className="nav-link font-medium">Sportz</Link>
-          <Link to="/collections/classic" className="nav-link font-medium">Classic</Link>
-          <Link to="/collections/limited-edition" className="nav-link font-medium">Limited Edition</Link>
+        <nav className="hidden md:flex space-x-8">
+          <Link to="/products" className="nav-link font-medium">Products</Link>
           <Link to="/technology" className="nav-link font-medium">Technology</Link>
           <Link to="/store-locator" className="nav-link font-medium">Store Locator</Link>
           <Link to="/support" className="nav-link font-medium">Support</Link>
@@ -47,14 +43,10 @@ const Navbar = () => {
       {/* Mobile Navigation */}
       <div className={cn(
         "md:hidden absolute w-full bg-white border-b border-gray-100 shadow-lg transition-all duration-300 ease-in-out overflow-hidden",
-        isMenuOpen ? "max-h-[500px]" : "max-h-0"
+        isMenuOpen ? "max-h-60" : "max-h-0"
       )}>
-        <nav className="container flex flex-col py-4 space-y-3">
-          <Link to="/products" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>All Products</Link>
-          <Link to="/collections/premier" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Premier</Link>
-          <Link to="/collections/sportz" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Sportz</Link>
-          <Link to="/collections/classic" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Classic</Link>
-          <Link to="/collections/limited-edition" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Limited Edition</Link>
+        <nav className="container flex flex-col py-4 space-y-4">
+          <Link to="/products" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Products</Link>
           <Link to="/technology" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Technology</Link>
           <Link to="/store-locator" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Store Locator</Link>
           <Link to="/support" className="nav-link font-medium" onClick={() => setIsMenuOpen(false)}>Support</Link>
